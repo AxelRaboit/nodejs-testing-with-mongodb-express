@@ -1,10 +1,11 @@
 const express =  require('express');
 const app = express();
 require('./models/dbConfig');
-
 const postsRoutes = require('./routes/postsController');
+const bodyParser = require('bodyParser');
 
-app.use('/', postsRoutes);
+app.use(bodyParser.json());
+app.use('/posts', postsRoutes);
 //When we are on the '/' we render the postsRoutes
 //who's the postsController file 
 
