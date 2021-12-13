@@ -9,15 +9,13 @@ const { PostsModel } = require('../models/postsModel');
 /* app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs'); */
 
-
 //GET DATA
 router.get('/', (req, res) => {
   PostsModel.find((err, docs) => {
     //VIEW PART
     if (!err) {
       /* res.send(docs); */
-      let datas = docs
-      res.render(path.join(__dirname,'../views/index.ejs'), {datas: datas});
+      res.render(path.join(__dirname,'../views/index.ejs'), {users: docs})
     }
     else console.log("Error to get data : " + err);
   })
