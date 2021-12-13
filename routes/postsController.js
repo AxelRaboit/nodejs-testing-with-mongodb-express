@@ -1,13 +1,24 @@
 const express = require('express');
 const router = express.Router();
+/* const app = express(); */ //For the view part
+const path = require('path'); //For the view part
 const ObjectID = require('mongoose').Types.ObjectId;
-
 const { PostsModel } = require('../models/postsModel');
+
+//VIEW PART
+/* app.set('views', path.join(__dirname, 'views'))
+app.set('view engine', 'ejs'); */
+
 
 //GET DATA
 router.get('/', (req, res) => {
   PostsModel.find((err, docs) => {
-    if (!err) res.send(docs);
+    //VIEW PART
+    if (!err) {
+      /* res.send(docs); */
+      let datas = docs
+      res.render(path.join(__dirname,'../views/index.ejs'), {datas: datas});
+    }
     else console.log("Error to get data : " + err);
   })
 });
